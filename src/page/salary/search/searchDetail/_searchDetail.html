@@ -1,0 +1,8 @@
+<div class="companyTree-wrapper">
+  <Bread />
+  <Content :style="{padding: '24px', background: '#fff'}">
+    <h2>奖金明细</h2>
+    <Table class="ivu-table" v-if="administrators===1" border :columns="lisTtitle" :data="listData"></Table>
+    <Table class="ivu-table" v-else border :columns="listTitleStaff" :data="listData"></Table>
+  </Content>
+</div>

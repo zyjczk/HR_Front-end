@@ -1,0 +1,88 @@
+<div style="position:relative">
+  <Bread />
+  <Content :style="{padding: '24px', background: '#fff'}">
+    <h2 v-if="administrators">分发公司列表</h2>
+    <h2 v-if="!administrators">分发列表</h2>
+    <div class="ivu-table ivu-table-border" style="height:auto;">
+      <div class="ivu-table-header">
+        <!-- <table cellspacing="0" cellpadding="0" border="0" style="width: 564px;border-top:1px solid #e9eaec;border-left:1px solid #e9eaec;">
+          <thead>
+            <tr>
+              <th class="">
+                <div class="ivu-table-cell">
+                  <span>奖励月份</span>
+                </div>
+              </th>
+              <th class="">
+                <div class="ivu-table-cell">
+                  <span>分发状态</span>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding-left:20px;"> -->
+        <!-- <DatePicker v-if="salaryType==0 && administrators" style="width:80%;" type="month" v-model="dateVal"></DatePicker> -->
+        <!-- <span>{{dateValSpan}}</span>
+              </td>
+              <td style="padding-left:20px;">
+                <span>{{salaryType | formateAuditStatus}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table> -->
+        <Table border class="mt20" :columns="monthTitle" :data="monthData" style="width: 564px"></Table>
+      </div>
+    </div>
+    <div v-if="salaryType===0 || salaryType===3" class="center mt20">
+      <Row>
+        <Col :span="2" v-if="showAuth('downloadTemplate')">
+        <Button type="ghost" @click="downExcel">下载模板</Button>
+        </Col>
+        <Col :span="2" v-if="showAuth('importTemplate')">
+        <Upload action="/kyBonus/approved/importTemplate" :data="{mainId:mainId,type:administrators}" :headers="{Authorization:tokenP}"
+          name="uploadFile" :show-upload-list="false" :on-success="uploadFileFun" :on-error="uploadFileErr">
+          <Button type="ghost" icon="ios-cloud-upload-outline">Excel导入</Button>
+        </Upload>
+        </Col>
+        <Col :span="2" v-if="showAuth('entryApproved')">
+        <Button type="primary" @click="getExpenses">报销数据</Button>
+        </Col>
+        <Col :span="2" v-if="showAuth('entryApproved')">
+        <Button type="primary" @click="modal1 = true">提交审核</Button>
+        </Col>
+      </Row>
+    </div>
+    <!-- 网点人员登录 -->
+    <div class="mt20" v-if="administrators===2">
+      <span>{{tableTips}}</span>
+      <Table border class="mt20 ivu-table" :columns="listTitleStaff" :data="listData"></Table>
+    </div>
+    <!-- 总部人员登录 -->
+    <div class="mt20" v-if="administrators===1">
+      <span>{{tableTips}}</span>
+      <Table border class="mt10 ivu-table" :columns="listTitle" :data="listData"></Table>
+    </div>
+    <div v-if="salaryType!=0" class="tl mt20">
+      <Row>
+        <Col :span="4">
+        <span>提交时间：{{entryTime}}</span>
+        </Col>
+        <Col v-if="salaryType==3" :span="4">
+        <span>驳回时间：{{approvedTime}}</span>
+        </Col>
+        <Col v-if="salaryType==3" :span="4">
+        <span>驳回原因：{{approvedRemarks}}</span>
+        </Col>
+      </Row>
+    </div>
+    <Modal v-model="modal1" title="请确认" @on-ok="commitAudit">
+      请认真核对您的奖金分配金额，提交后无法修改！
+    </Modal>
+    <Modal v-model="modal2" width="800" title="导入日志" cancel-text="关闭窗口">
+      <h3>本次导入成功金额总计:{{modal2Amount}}</h3>
+      <Table class="mt20" border :columns="errors" :data="errorData"></Table>
+    </Modal>
+  </Content>
+</div>

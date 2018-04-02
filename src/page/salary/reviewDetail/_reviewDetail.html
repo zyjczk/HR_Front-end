@@ -1,0 +1,8 @@
+<div style="height: 100%;position:relative">
+  <Bread />
+  <Content :style="{padding: '24px', background: '#fff'}">
+    <h2>待审核列表</h2>
+    <Table border :columns="lisTtitle" :data="listData"></Table>
+    <router-view></router-view>
+  </Content>
+</div>

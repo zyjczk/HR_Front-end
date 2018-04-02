@@ -1,0 +1,14 @@
+<div class="companyTree-wrapper">
+  <Bread />
+  <Content :style="{padding: '24px', height: '90%', background: '#fff'}">
+    <div>
+      <h3>基本信息</h3>
+      <hr>
+      <p>角色名称：{{name}}</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;状态： {{logicaldel}}</p>
+      <p>角色备注： {{remark}}</p>
+    </div>
+    <AuthComponent />
+    <Button class="mt20" @click='goback' type="primary">返回</Button>
+  </Content>
+</div>

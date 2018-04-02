@@ -1,0 +1,31 @@
+<div class="companyTree-wrapper">
+  <Bread />
+  <Content :style="{padding: '24px', height: '90%', background: '#fff'}">
+    <div>
+      <Form ref="formSearch" :model="formSearch" inline :label-width="80">
+        <FormItem prop="loginId" label="工号">
+          <Input type="text" v-model="formSearch.loginId" placeholder="请输入工号">
+          </Input>
+        </FormItem>
+        <FormItem prop="name" label="姓名">
+          <Input type="text" v-model="formSearch.name" placeholder="请输入姓名">
+          </Input>
+        </FormItem>
+        <FormItem>
+          <Button type="primary" @click="handleSearch">搜索</Button>
+        </FormItem>
+      </Form>
+    </div>
+    <Table border ref="selection" :columns="columns" :data="data" @on-selection-change="selectItemChange"></Table>
+    <div class="mt20 page-wrapper">
+      <Page :total="total" show-elevator show-total @on-change="pageChange"></Page>
+    </div>
+    <div class="btn-wrapper mt20">
+      <Button type="primary" @click="batchDelete" v-if="showAuth('deleteOperator4Role')">批量删除</Button>
+      <Button type="dashed" @click="goback">返回</Button>
+    </div>
+  </Content>
+  <Modal v-model="deleteModal" title="删除提示" @on-ok="confirmDeleteUser">
+    <h3>删除后该用户将失去该角色对应的功能权限，是否确认删除？</h3>
+  </Modal>
+</div>

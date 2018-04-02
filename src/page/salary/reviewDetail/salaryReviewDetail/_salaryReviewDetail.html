@@ -1,0 +1,25 @@
+<div class="companyTree-wrapper">
+  <Bread />
+  <Content :style="{padding: '24px', background: '#fff'}">
+    <Row>
+      <Col :span="4"> 奖励月份：{{bonusMonth}}
+      </Col>
+      <Col v-if="administrators!==1" :span="4"> 奖励机构级别：{{orgName}}
+      </Col>
+      <Col v-if="administrators!==1" :span="4"> 奖金限额:{{amount}}
+      </Col>
+      <Col :span="4"> 提交时间：{{approvedTime}}
+      </Col>
+    </Row>
+    <h2>分配明细表</h2>
+    <Table class="ivu-table" v-if="administrators===1" border :columns="lisTtitle" :data="listData"></Table>
+    <Table class="ivu-table" v-else border :columns="listTitleStaff" :data="listData"></Table>
+    <div class="mt20 center" v-if="showAuth('approvedBonus')">
+      <Button type="primary" @click="passed(2,'')">审核通过</Button>
+      <Button class="ml20 w80" type="error" @click="modal1 = true">驳回</Button>
+    </div>
+    <Modal v-model="modal1" :loading="loading" title="请输入驳回原因：" @on-ok="ok">
+      <Input v-model="text" type="textarea" :rows="4"></Input>
+    </Modal>
+  </Content>
+</div>

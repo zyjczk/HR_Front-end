@@ -1,0 +1,10 @@
+<div class="companyTree-wrapper">
+  <Bread />
+  <Content :style="{padding: '24px', height: '90%', background: '#fff'}">
+    <RoleTable :check="check" :from='from' :roleData='roleData' ref='roletableRef' />
+    <div class="mt20">
+      <Button type="primary" @click="confirm">确定</Button>
+      <Button type="dashed" @click="goback">返回</Button>
+    </div>
+  </Content>
+</div>

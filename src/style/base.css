@@ -1,0 +1,41 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.ml20 {
+    margin-left: 20px;
+}
+
+h2 {
+    text-align: center;
+    padding: 20px;
+}
+
+.center {
+    text-align: center;
+}
+
+.ivu-table tr.money-primary td {
+    background-color: #2db7f5;
+    color: #fff;
+}
+
+.ivu-table .table-cell-amount {
+    /* background-color: #2db7f5; */
+    color: red;
+}
+
+.ivu-table .tableCellAmount input {
+    color:red
+}

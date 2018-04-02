@@ -1,0 +1,29 @@
+<div class="companyTree-wrapper">
+  <Bread />
+  <Content :style="{padding: '24px', height: '90%', background: '#fff'}">
+    <div>
+      <h3>基本信息</h3>
+      <hr>
+      <div>角色名称：<div class="input-wrapper"><Input placeholder="请输入角色名称" v-model='name' /></div></div>
+      <div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;状态：
+        <div class="radio-wrapper">
+          <RadioGroup v-model="logicaldel">
+            <Radio label="off">
+              <span>有效</span>
+            </Radio>
+            <Radio label="on">
+              <span>无效</span>
+            </Radio>
+          </RadioGroup>
+        </div>
+      </div>
+      <div>角色备注： <div class="input-wrapper">
+        <Input type="textarea" v-model='remark' />
+      </div></div>
+    </div>
+    <AuthComponent :originData='originData' :treeData='treeData' ref='authComponent'/>
+    <Button class="mt20" type="primary" @click="handleSaveRole">保存</Button>
+    <Button class="mt20" @click='goback' type="dashed">返回</Button>
+  </Content>
+</div>

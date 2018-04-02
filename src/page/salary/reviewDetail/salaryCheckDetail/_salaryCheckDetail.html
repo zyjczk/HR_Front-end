@@ -1,0 +1,26 @@
+<div class="companyTree-wrapper">
+  <Bread />
+  <Content :style="{padding: '24px', background: '#fff'}">
+    <Row>
+      <Col :span="4"> 奖励月份：{{bonusMonth}}
+      </Col>
+      <Col v-if="administrators!==1" :span="4"> 提交时间:{{entryTime}}
+      </Col>
+      <Col v-if="administrators!==1" :span="4"> 奖金限额:{{amount}}
+      </Col>
+      <Col :span="4"> 提交时间：{{approvedTime}}
+      </Col>
+    </Row>
+    <Row>
+      <Col :span="4"> 审核状态：{{approvedStatus}}
+      </Col>
+      <Col :span="4" v-if="approvedStatus==='审批驳回'"> 原因：{{approvedRemarks}}
+      </Col>
+      <Col :span="4"> 审核时间：{{approvedTime}}
+      </Col>
+    </Row>
+    <h2>奖金分配明细</h2>
+    <Table class="ivu-table" v-if="administrators===1" border :columns="lisTtitle" :data="listData"></Table>
+    <Table class="ivu-table" v-else border :columns="listTitleStaff" :data="listData"></Table>
+  </Content>
+</div>

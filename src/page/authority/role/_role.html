@@ -1,0 +1,7 @@
+<div style="height: 100%; position: relative">
+  <Bread />
+  <Content :style="{padding: '24px', height: '90%', background: '#fff'}">
+    <RoleTable from='role' ref='roletableRef' :roleData='roleData' @deleteSuccess='deleteSuccess'/>
+  </Content>
+  <router-view></router-view>
+</div>
